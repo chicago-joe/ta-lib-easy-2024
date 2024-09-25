@@ -1,5 +1,5 @@
 {
-    "name": "scikit-build-core-vcpkg",
+    "name": "ta-lib-easy",
     "dependencies": [
         "talib"
     ]

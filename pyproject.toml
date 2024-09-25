@@ -3,16 +3,18 @@ build-backend = "scikit_build_core.build"
 requires = [
     "cython>=3.0.0",
     "scikit-build-core",
+    "cython-cmake"
 ]
 
 [project]
-name = "pkg1"
+name = "ta-lib-easy"
 version = "1.0.0"
 
 [tool.scikit-build]
 ninja.make-fallback = false
 cmake.args = [
     "-DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake",
-    "-DVCPKG_INSTALLED_DIR=./vcpkg_installed",
-    "-DBUILD_PYTHON_EXTENSION=ON"
+    "-DVCPKG_INSTALLED_DIR=./vcpkg_installed"
 ]
+cmake.verbose = true
+logging.level = "DEBUG"

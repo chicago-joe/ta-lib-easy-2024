@@ -1,5 +1,6 @@
-cmake_minimum_required(VERSION 3.15...3.29)
+cmake_minimum_required(VERSION 3.25...3.30)
 project(${SKBUILD_PROJECT_NAME} LANGUAGES C)
+set(VCPKG_ROOT "${CMAKE_SOURCE_DIR}/vcpkg/installed/x64-windows")
 
 find_package(
   Python
@@ -7,18 +8,29 @@ find_package(
   REQUIRED
 )
 
-find_package(TALib REQUIRED)
+find_package(Cython)
+include(UseCython)
 
-add_custom_command(
-  OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/src/pkg1/one.c"
-  MAIN_DEPENDENCY "${CMAKE_CURRENT_SOURCE_DIR}/src/pkg1/one.pyx"
-  VERBATIM
-  COMMAND
-    Python::Interpreter -m cython
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/pkg1/one.pyx" --output-file
-    "${CMAKE_CURRENT_BINARY_DIR}/src/pkg1/one.c")
+cython_transpile(
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/ta_lib_easy/one.pyx"
+    LANGUAGE C
+    OUTPUT_VARIABLE one_c
+    CYTHON_ARGS --include-dir "${VCPKG_ROOT}/include"
+)
 
-python_add_library(one MODULE "${CMAKE_CURRENT_BINARY_DIR}/src/pkg1/one.c"
-                   WITH_SOABI)
+python_add_library(
+    one
+    MODULE
+    "${one_c}"
+    WITH_SOABI
+)
+target_link_libraries(
+    one
+    PUBLIC
+    "${VCPKG_ROOT}/lib/ta_abstract.lib"
+    "${VCPKG_ROOT}/lib/ta_common.lib"
+    "${VCPKG_ROOT}/lib/ta_func.lib"
+    "${VCPKG_ROOT}/lib/ta_libc.lib"
+)
 
-install(TARGETS one DESTINATION pkg1/)
+install(TARGETS one DESTINATION ta_lib_easy/)

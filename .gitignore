@@ -195,3 +195,4 @@ cython_debug/
 build/
 vcpkg_installed/
 wheelhouse/
+src/pkg1/*.c
