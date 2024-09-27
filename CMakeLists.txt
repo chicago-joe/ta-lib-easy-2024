@@ -4,7 +4,7 @@ set(VCPKG_ROOT "${CMAKE_SOURCE_DIR}/vcpkg/installed/x64-windows")
 
 find_package(
   Python
-  COMPONENTS Interpreter Development.Module
+  COMPONENTS Interpreter Development.Module NumPy
   REQUIRED
 )
 
@@ -42,6 +42,7 @@ target_include_directories(
     BEFORE
     PUBLIC
     "${VCPKG_ROOT}/include"
+    ${Python_NumPy_INCLUDE_DIRS}
 )
 
 install(TARGETS one DESTINATION ta_lib_easy/)
