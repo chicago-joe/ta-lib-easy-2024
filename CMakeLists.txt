@@ -13,23 +13,23 @@ include(UseCython)
 
 message(STATUS "Transpiling cython")
 cython_transpile(
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/ta_lib_easy/one.pyx"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/ta_lib_easy/_ta_lib.pyx"
     LANGUAGE C
-    OUTPUT_VARIABLE one_c
+    OUTPUT_VARIABLE _ta_lib_c
     CYTHON_ARGS -I "${VCPKG_ROOT}/include"
 )
 
 message(STATUS "Creating python library")
 python_add_library(
-    one
+    _ta_lib
     MODULE
-    "${one_c}"
+    "${_ta_lib_c}"
     WITH_SOABI
 )
 
 message(STATUS "Linking python library to TALib")
 target_link_libraries(
-    one
+    _ta_lib
     PUBLIC
     "${VCPKG_ROOT}/lib/ta_abstract.lib"
     "${VCPKG_ROOT}/lib/ta_common.lib"
@@ -37,7 +37,7 @@ target_link_libraries(
     "${VCPKG_ROOT}/lib/ta_libc.lib"
 )
 target_include_directories(
-    one
+    _ta_lib
     SYSTEM
     BEFORE
     PUBLIC
@@ -45,4 +45,4 @@ target_include_directories(
     ${Python_NumPy_INCLUDE_DIRS}
 )
 
-install(TARGETS one DESTINATION ta_lib_easy/)
+install(TARGETS _ta_lib DESTINATION ta_lib_easy/)
