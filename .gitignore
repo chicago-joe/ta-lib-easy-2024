@@ -192,7 +192,6 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-build/
 vcpkg_installed/
 wheelhouse/
 src/pkg1/*.c

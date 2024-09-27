@@ -16,5 +16,5 @@ cmake.args = [
     "-DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake",
     "-DVCPKG_INSTALLED_DIR=./vcpkg_installed"
 ]
-cmake.verbose = true
+build.verbose = true
 logging.level = "DEBUG"
