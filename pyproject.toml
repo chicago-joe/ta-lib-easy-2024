@@ -8,7 +8,7 @@ requires = [
 ]
 
 [project]
-name = "ta-lib-easy"
+name = "ta_lib"
 version = "1.0.0"
 
 [tool.scikit-build]

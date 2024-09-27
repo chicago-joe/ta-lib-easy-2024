@@ -13,7 +13,7 @@ include(UseCython)
 
 message(STATUS "Transpiling cython")
 cython_transpile(
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/ta_lib_easy/_ta_lib.pyx"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/ta_lib/_ta_lib.pyx"
     LANGUAGE C
     OUTPUT_VARIABLE _ta_lib_c
     CYTHON_ARGS -I "${VCPKG_ROOT}/include"
@@ -45,4 +45,4 @@ target_include_directories(
     ${Python_NumPy_INCLUDE_DIRS}
 )
 
-install(TARGETS _ta_lib DESTINATION ta_lib_easy/)
+install(TARGETS _ta_lib DESTINATION ta_lib/)

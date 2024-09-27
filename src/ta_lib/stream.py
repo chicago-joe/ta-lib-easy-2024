@@ -1,4 +1,4 @@
-import ta_lib_easy._ta_lib as _ta_lib
+import ta_lib._ta_lib as _ta_lib
 from ._ta_lib import __TA_FUNCTION_NAMES__
 
 
