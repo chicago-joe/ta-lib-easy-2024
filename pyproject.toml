@@ -1,7 +1,7 @@
 [build-system]
 build-backend = "scikit_build_core.build"
 requires = [
-    "cython>=3.0.0",
+    "cython",
     "scikit-build-core",
     "cython-cmake",
     "numpy"
@@ -10,6 +10,7 @@ requires = [
 [project]
 name = "ta_lib"
 version = "1.0.0"
+requires-python = ">=3.8"
 
 [tool.scikit-build]
 ninja.make-fallback = false
@@ -19,3 +20,22 @@ cmake.args = [
 ]
 build.verbose = true
 logging.level = "DEBUG"
+
+[tool.cibuildwheel]
+build = "cp*"
+skip = ["cp*-musllinux*", "pp*"]
+archs = ["x86_64", "AMD64", "arm64"]
+
+[tool.cibuildwheel.linux]
+before-all = '''
+rm -rf vcpkg
+rm -rf vcpkg_installed
+yum -y install curl zip unzip tar
+git clone https://github.com/microsoft/vcpkg.git
+./vcpkg/bootstrap-vcpkg.sh
+./vcpkg/vcpkg install
+'''
+archs = ['x86_64']
+
+[tool.cibuildwheel.windows]
+archs = ['AMD64']
