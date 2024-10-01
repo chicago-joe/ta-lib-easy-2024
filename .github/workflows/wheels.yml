@@ -24,9 +24,6 @@ jobs:
 
             - name: Build wheels
               run: python -m cibuildwheel --output-dir wheelhouse
-              env:
-                CIBW_ARCHS_WINDOWS: x86
-                CIBW_ARCHS_LINUX: x86_64
 
             - name: Upload built wheels as artifacts
               uses: actions/upload-artifact@v3
