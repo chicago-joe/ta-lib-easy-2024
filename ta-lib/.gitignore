@@ -1,0 +1,70 @@
+*.o
+*.lo
+*.la
+*.pc
+*.m4
+Makefile
+Makefile.in
+.deps
+.libs
+.dirstamp
+config.*
+ta-lib.dpkg
+ta-lib.spec
+missing
+ltmain.sh
+libtool
+install-sh
+include/ta_config.*
+include/stamp-h1
+depcomp
+configure
+compile
+autom4te.cache
+ar-lib
+gen_code
+ta_regtest
+
+**/.history/
+## File system
+.DS_Store
+desktop.ini
+
+## User stuff...
+node_modules
+__pycache__
+venv
+.venv
+.env
+
+# Build files (from mkdocs)
+/site
+/build
+/MANIFEST
+
+## Temporary files
+*~
+\#*
+\#*\#
+.#
+TODO
+tmp
+
+## Editors
+*.swp
+*.swo
+Session.vim
+.cproject
+.idea
+*.iml
+.project
+.favorites.json
+.settings/
+.vscode/ltex.disabledRules.en-US.txt
+.vscode/ltex.dictionary.en-US.txt
+
+## MSVC Windows builds (debug info)
+*.pdb
+
+# Never ignore .gitkeep files
+!**/.gitkeep
