@@ -1,6 +1,0 @@
-{
-    "name": "ta-lib-easy",
-    "dependencies": [
-        "talib"
-    ]
-}
