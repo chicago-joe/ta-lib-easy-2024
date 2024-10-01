@@ -15,8 +15,8 @@ requires-python = ">=3.8"
 [tool.scikit-build]
 ninja.make-fallback = false
 cmake.args = [
-    "-DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake",
-    "-DVCPKG_INSTALLED_DIR=./vcpkg_installed"
+#    "-DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake",
+#    "-DVCPKG_INSTALLED_DIR=./vcpkg_installed"
 ]
 build.verbose = true
 logging.level = "DEBUG"
@@ -28,12 +28,6 @@ archs = ["x86_64", "AMD64", "arm64"]
 
 [tool.cibuildwheel.linux]
 before-all = '''
-rm -rf vcpkg
-rm -rf vcpkg_installed
-yum -y install curl zip unzip tar
-git clone https://github.com/microsoft/vcpkg.git
-./vcpkg/bootstrap-vcpkg.sh
-./vcpkg/vcpkg install
 '''
 archs = ['x86_64']
 

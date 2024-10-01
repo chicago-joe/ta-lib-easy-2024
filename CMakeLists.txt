@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.25...3.30)
 project(${SKBUILD_PROJECT_NAME} LANGUAGES C)
-set(VCPKG_ROOT "${CMAKE_SOURCE_DIR}/vcpkg/installed/x64-windows")
+
+add_subdirectory(ta-lib)
 
 find_package(
   Python
@@ -31,17 +32,14 @@ message(STATUS "Linking python library to TALib")
 target_link_libraries(
     _ta_lib
     PUBLIC
-    "${VCPKG_ROOT}/lib/ta_abstract.lib"
-    "${VCPKG_ROOT}/lib/ta_common.lib"
-    "${VCPKG_ROOT}/lib/ta_func.lib"
-    "${VCPKG_ROOT}/lib/ta_libc.lib"
+    ta_lib_static
 )
 target_include_directories(
     _ta_lib
     SYSTEM
     BEFORE
     PUBLIC
-    "${VCPKG_ROOT}/include"
+    ${CMAKE_CURRENT_SOURCE_DIR}/ta-lib/include
     ${Python_NumPy_INCLUDE_DIRS}
 )
 
