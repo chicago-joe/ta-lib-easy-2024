@@ -9,7 +9,7 @@ requires = [
 
 [project]
 name = "ta_lib_easy"
-version = "1.0.1"
+version = "1.0.2"
 requires-python = ">=3.8"
 packages=["talib"]
 package_dir = {"" = "src"}
