@@ -14,7 +14,7 @@ include(UseCython)
 
 message(STATUS "Transpiling cython")
 cython_transpile(
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/ta_lib/_ta_lib.pyx"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/talib/_ta_lib.pyx"
     LANGUAGE C
     OUTPUT_VARIABLE _ta_lib_c
     CYTHON_ARGS -I "${VCPKG_ROOT}/include"
@@ -43,4 +43,11 @@ target_include_directories(
     ${Python_NumPy_INCLUDE_DIRS}
 )
 
-install(TARGETS _ta_lib DESTINATION ta_lib/)
+install(TARGETS _ta_lib DESTINATION talib/)
+install(FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/talib/__init__.py
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/talib/abstract.py
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/talib/deprecated.py
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/talib/stream.py
+    DESTINATION talib/
+)

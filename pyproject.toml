@@ -11,13 +11,11 @@ requires = [
 name = "ta_lib_easy"
 version = "1.0.1"
 requires-python = ">=3.8"
+packages=["talib"]
+package_dir = {"" = "src"}
 
 [tool.scikit-build]
 ninja.make-fallback = false
-cmake.args = [
-#    "-DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake",
-#    "-DVCPKG_INSTALLED_DIR=./vcpkg_installed"
-]
 build.verbose = true
 logging.level = "DEBUG"
 
