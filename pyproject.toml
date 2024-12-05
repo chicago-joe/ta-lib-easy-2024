@@ -21,4 +21,3 @@ logging.level = "DEBUG"
 
 [tool.cibuildwheel]
 build = "cp*"
-skip = ["cp*-musllinux*"]
