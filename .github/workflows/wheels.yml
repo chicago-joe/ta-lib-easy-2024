@@ -41,7 +41,7 @@ jobs:
         include: ${{ fromJson(needs.generate-wheels-matrix.outputs.include) }}
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Set up QEMU
         if: runner.os == 'Linux'
@@ -53,10 +53,10 @@ jobs:
         with:
           only: ${{ matrix.only }}
       
-       - uses: actions/upload-artifact@v4
-          with:
-            name: wheels
-            path: ./wheelhouse/*.whl
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels
+          path: ./wheelhouse/*.whl
 
     # build_wheels:
     #   name: Build wheels on ${{ matrix.os }}
