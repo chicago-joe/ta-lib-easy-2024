@@ -11,9 +11,21 @@ jobs:
         runs-on: ${{ matrix.os }}
         strategy:
             matrix:
-                os: [ubuntu-latest, windows-latest, macos-latest]
-                arch: [AMD64, x86_x64]
-
+          - {os: macos-latest, arch: x86_64, build: "*"}
+          - {os: macos-latest, arch: arm64, build: "*"}
+          - {os: windows-latest, arch: AMD64, build: "*"}
+          - {os: windows-latest, arch: x86, build: "*"}          
+          - {os: ubuntu-latest, arch: x86_64, build: "*"}
+          - {os: ubuntu-latest, arch: aarch64, build: "*[61]-manylinux*"}
+          - {os: ubuntu-latest, arch: aarch64, build: "*[72]-manylinux*"}
+          - {os: ubuntu-latest, arch: aarch64, build: "*[83]-manylinux*"}
+          - {os: ubuntu-latest, arch: aarch64, build: "*[94]-manylinux*"}
+          - {os: ubuntu-latest, arch: aarch64, build: "*[05]-manylinux*"}
+          - {os: ubuntu-latest, arch: aarch64, build: "*[61]-musllinux*"}
+          - {os: ubuntu-latest, arch: aarch64, build: "*[72]-musllinux*"}
+          - {os: ubuntu-latest, arch: aarch64, build: "*[83]-musllinux*"}
+          - {os: ubuntu-latest, arch: aarch64, build: "*[94]-musllinux*"}
+          - {os: ubuntu-latest, arch: aarch64, build: "*[05]-musllinux*"}
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -25,6 +37,10 @@ jobs:
 
             - name: Build wheels
               run: python -m cibuildwheel --output-dir wheelhouse
+              env:
+                CIBW_BUILD_VERBOSITY: 1
+                CIBW_ARCHS: ${{ matrix.arch }}
+                CIBW_BUILD: ${{ matrix.build }}
 
             - name: Upload built wheels as artifacts
               uses: actions/upload-artifact@v3
