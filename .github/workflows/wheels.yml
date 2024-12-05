@@ -41,11 +41,22 @@ jobs:
         include: ${{ fromJson(needs.generate-wheels-matrix.outputs.include) }}
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        if: runner.os == 'Linux'
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: all
 
       - uses: pypa/cibuildwheel@v2.22.0
         with:
           only: ${{ matrix.only }}
+      
+       - uses: actions/upload-artifact@v4
+          with:
+            name: wheels
+            path: ./wheelhouse/*.whl
 
     # build_wheels:
     #   name: Build wheels on ${{ matrix.os }}
